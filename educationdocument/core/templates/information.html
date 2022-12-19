@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        span{
+            font-weight: 500;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex w-100 align-items-center justify-content-center py-3">
+
+        
+        <div class="d-flex flex-column align-items-center justify-content-center w-50">
+            <img class="mb-3" src="https://ekabinet.dim.gov.az/App_Images/Logo_dim.png" style="width: 130px;object-fit:cover;height: 80px;" alt="">
+            <h3  class="text-primary mb-3">DÖVLƏT İMTAHAN MƏRKƏZİ</h3>
+            <span class="text-primary text-center">Abituriyentin 2021/2022-ci tədris ili üçün bakalavriat səviyyəsi üzrə keçirilmiş test imtahanlarında topladığı ballar haqqında ARAYIŞ</span>
+        
+        </div>
+      </div>
+      <hr>
+      <h3>Abituriyent haqqında məlumat</h3>
+      <div class="row py-3">
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+            <img style="width: 40%; height: 150px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTmGxzEe3HaPa0F5I-zKxkHAykm4bXAlMaljpFl6X7oS3m_8KS-XarneW0OudmN6K_P8Q&usqp=CAU" alt="">
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex justify-content-evenly w-100" style="font-size: 18px;">
+                <b>İş nömrəsi: </b><span class="text-primary" style="font-weight: 500; font-style: italic;"> {{user.number}}</span>
+            </div>
+            <div class="d-flex justify-content-evenly w-100" style="font-size: 18px;">
+                <b>Ad: </b><span class="text-primary" style="font-weight: 500; font-style: italic;"> {{user.first_name}}</span>
+            </div>
+            <div class="d-flex justify-content-evenly w-100" style="font-size: 18px;">
+                <b>Soyad: </b><span class="text-primary" style="font-weight: 500; font-style: italic;"> {{user.last_name}}</span>
+            </div>
+            <div class="d-flex justify-content-evenly w-100" style="font-size: 18px;">
+                <b>Ata adı: </b><span class="text-primary" style="font-weight: 500; font-style: italic;"> {{user.father_name}}</span>
+            </div>
+            <div class="d-flex justify-content-evenly w-100" style="font-size: 18px;">
+                <b>Doğum tarixi: </b><span class="text-primary" style="font-weight: 500; font-style: italic;"> {{user.birthday}}</span>
+            </div>
+            <div class="d-flex justify-content-evenly w-100" style="font-size: 18px;">
+                <b>FİN Kod: </b><span class="text-primary" style="font-weight: 500; font-style: italic;"> {{user.fin}}</span>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+            {% if user.gender == "Qadın" %}
+            <img style="width: 40%; height: 150px;" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_female-512.png" alt="">
+            {% else %}
+            <img style="width: 30%; height: 150px;" src="http://cdn.onlinewebfonts.com/svg/img_529940.png" alt="">
+            {% endif %}
+        </div>
+      </div>
+      <hr>
+      <div class="d-flex flex-column py-4">
+ <h3>Topladığı ballar haqqında məlumat</h3>
+      <h4 class="text-danger">Test imtahanının birinci mərhələsi</h4>
+      <span>Mümkün olan maksimal bal: 300</span>
+      <span>Topladığı bal : <b id="point1"> {{user.point1}}</b></span> 
+      <br>
+      <h4 class="text-danger">Test imtahanının ikinci mərhələsi</h4>
+      <span>Mümkün olan maksimal bal: 400</span>
+      <span>Topladığı bal : <b id="point2">{{user.point2}}</b></span> 
+      </div>
+      <hr>
+      <div class="d-flex flex-column">
+        
+             <h4 class="text-danger">Topladığı ümumi bal</h4>
+             <span>Mümkün olan maksimal bal: 700</span>
+             <span>Topladığı bal : <b id="sum"></b></span> 
+             <br>
+             
+             </div>
+             <hr>
+             <div class="d-flex align-items-center justify-content-center py-3">
+                <span>Tarix: {{user.date}}</span> 
+             </div>
+             <div class="d-flex align-items-center justify-content-center py-3"   style="padding: 20px 0; display: flex;align-items: center;justify-content: center;">
+                <a href="{% url 'export_pdf' user.id %}" class="btn btn-primary py-3 px-5" style="font-size: 18px;font-weight: 500;" download>Sənədimi yüklə</a>
+              </div>
+            
+     
+    </div>
+    <script type="text/javascript">
+        let num1 = document.getElementById("point1").textContent;
+        let num2 = document.getElementById("point2").textContent;
+        let sum = Number(num1) + Number(num2);
+        document.getElementById("sum").innerHTML = sum;
+        console.log(sum)
+    </script>
+</body>
+</html>
